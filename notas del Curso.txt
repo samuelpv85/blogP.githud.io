@@ -13,7 +13,7 @@ git rm nombre_del_archivo.txt: para eliminar del repositorio
 
 git config --global user.name "Samuel Patiño"
 git config --global user.email "levivo2@hotmail.com"
-
+pass = tesV2525spv
 
 
 
