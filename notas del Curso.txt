@@ -4,6 +4,8 @@ git add nombre_del_archivo.txt: enviar el archivo al staged
 git status: ver el estado, si se requiere agregar al starget o si se requiere commit
 git commit -m "Un cometario sobre el cambio o descricion del archivo"
 
+git log nombreArchivo "Ver historia del archivo"
+
 git config: para ver las posibles configiguraciones
 git config --list: para ver la lista de configiguraciones hechas
 git config --list --show-origin: para mostrar las configuraciones y sus rutas
