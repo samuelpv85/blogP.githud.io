@@ -192,7 +192,7 @@ Cambios en GitHub: de master a main
 
 ********************************************************************************************************
 
-Analizar cambios en los archivos de tu proyecto con Git
+Analizar cambios en los archivos de tu proyecto con Git 1
 9/43
 
 RECURSOS
