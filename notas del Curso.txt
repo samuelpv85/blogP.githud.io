@@ -5,6 +5,9 @@ git status: ver el estado, si se requiere agregar al starget o si se requiere co
 git commit -m "Un cometario sobre el cambio o descricion del archivo"
 
 git log nombreArchivo "Ver historia del archivo"
+git show _archivo_ (Muestra los cambios que han existido en el archivo)
+git diff _tag1_ _tag2_ (Hace la comparativa de cambios entre el archivo en su etapa en el commit del tag1 y del tag2. Considera al más reciente como tag2 y al original como tag1, SI IMPORTA EL ORDEN DE LOS TAGS)
+
 git push: envía a otro repositorio remoto lo que estamos haciendo
 git pull: traer repositorio remoto
 git checkout: traer cambios realizados
