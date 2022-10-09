@@ -2,4 +2,4 @@ primer comentarrio repo git
 
 archivo creado Domingo 09-10-2022 a la 19:45
 
-Soy Samuel y tengo 35.
+Soy Samuel y tengo 36. 
