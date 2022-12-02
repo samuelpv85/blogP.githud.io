@@ -35,6 +35,10 @@ crear llaves ssh
 copiarla en el repositorio
 agregar ssh al repositorio local
 
+Cambiar conexion pos SSH
+git remote -v
+git remote set-url origin git@github.com:samuelpv85/blogP.git
+
 - Tags y versiones
 git tag -a v0.1 -m "comentario" diCommit
 git tag
@@ -731,43 +735,189 @@ Ejecutan este comando en la terminal y queda guardado en los alias pero de git. 
 
 git config --global alias.superlog "log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all"
 
+++++++++++
 
+Los apuntes lo realizo con Canva (https://www.canva.com) , también con la aplicación de Android (o iOS). Me sirve bastante para interiorizar los conceptos claves, trato de usar un modelo como Notas de Cornell, no trato de enfocarme mucho en el diseño, pero si algo que me sirva para repasar.
 
+Si tienes un email asociado a una entidad educativa (.edu o similar), pueden adquirir una licencia con mayores funcionalidades que la versión gratuita (https://www.canva.com/education/)
+
+Si quieren aprender a usar la app, tiene cursos que pueden encontrar en este link: https://designschool.canva.com, aunque la herramienta es muy intuitiva.
 
 ++++++++++
 
+Para un proyecto:
+git config alias.arbolito "log --all --graph --decorate --oneline"
 
+Global:
+git config --global alias.arbolito "git log --all --graph --decorate --oneline"
 
+Para correrlo:
+git arbolito
 
 ++++++++++
+Comandos aprendidos en la clase:
 
+alias: se usa para resumir los comandos que nos de flojera escribir, se usa así: alias nombre_de_alias=“git log --all --graph --decorate --oneline”
 
+git tag: se usa para crear tags, versiones o referencias en tu proyecto, se suele usar de esta forma: git tag -a v0.1 -m “versión 0.1 del archivo” 4b0d564
+también podemos usar -b para borrar algún tag, escribiendo git tag -b nombre_del_tag.
+ese último es lo que aparece cuando hacemos un commit.
 
+git tag: con este sabemos que tags tenemos
+
+git show-ref --tags: nos muestra el tag que está asignado al commit en el que tenemos el tag
+
+git push origin --tags: nos enía los tags que tenemos en el local al repositorio remoto
+
+git push origin :refs/tags/nombre_del_tag: nada que decir, borramos los tags del repositorio remoto jaja
 ++++++++++
 
+Para ver el funcionamiento de las ramas / branches:
+
+$ git log --all --graph 
+//también 
+$ git log --all --graph --decorate--oneline
+// truco de Linux:
+//					 I──Comando
+//					V
+$ alias _________="_________"
+//     ^──Nombre que quieras para el comando	
+Para crear un tag:
+
+Copiar el hash del commit que queramos:
+$ git tag -a ___________ -m "___________" _________
+//		    ^──Nombre del tag			^──Hash
+Para enviar nuestros tags al repositorio de GitHub:
+
+1. $ git pull origin master
+2. $ git push origin --tags
+Para eliminar tags del repositorio local:
+
+$ git tag -d _________
+//			^──Nombre del tag que se quiere borrar
+Para eliminar tags del repositorio remoto:
+
+Hacer paso anterior
+$ git push origin :remote/tags/________________
+//						^──Nombre del tag que se quiere eliminar
 
 
 ********************************************************************************************************
 
+Manejo de ramas en GitHub v24/43
+
+git show-branch
+git show-branch --all
+
+
+Si no te funciona el comando gitk es posible no lo tengas instalado por defecto.
+Para instalar gitk debemos ejecutar los siguientes comandos:
+sudo apt-get update
+sudo apt-get install gitk
+
+Repasa: ¿Qué es Git?
+
+Las ramas nos permiten hacer cambios a nuestros archivos sin modificar la versión principal (master). Puedes trabajar con ramas que nunca envías a GitHub, así como pueden haber ramas importantes en GitHub que nunca usas en el repositorio local. Lo crucial es que aprendas a manejarlas para trabajar profesionalmente.
+
+Si, estando en otra rama, modificamos los archivos y hacemos commit, tanto el historial(git log) como los archivos serán afectados. La ventaja que tiene usar ramas es que las modificaciones solo afectarán a esa rama en particular. Si luego de “guardar” los archivos(usando commit) nos movemos a otra rama (git checkout otraRama) veremos como las modificaciones de la rama pasada no aparecen en la otraRama.
+
+Comandos para manejo de ramas en GitHub
+Crear una rama:
+git branch branchName
+Movernos a otra rama:
+git checkout branchName
+Crear una rama en el repositorio local:
+git branch nombre-de-la-rama o git checkout -b nombre-de-la-rama.
+Publicar una rama local al repositorio remoto:
+git push origin nombre-de-la-rama.
+Recuerda que podemos ver gráficamente nuestro entorno y flujo de trabajo local con Git utilizando el comando gitk. Gitk fue el primer visor gráfico que se desarrolló para ver de manera gráfica el historial de un repositorio de Git.
+
+Repasa: Qué es branch.
+
+Aporte creado por: Brayan Mamani
+
+Clases relacionadas
+++++++++++
+
+A mi me gusta usar GitKraken como interfaz gráfica. Es fácil de usar y muy interactiva. Pero a la hora del manejo de mis ramas y trabajo con repositorios remotos sigo usando la consola. Me parece mas rápido el uso de la consola y me siento más cómodo con ella, GitKraken lo uso para hacer mis commits y para revisar las diferencias de mi código de forma más amigable. Pero no deja de ser una herramienta muy poderosa para facilitar el trabajo a los desarrolladores. Deberían probarla.
+gitkraken.PNG
+
+Responder
+Joshval97
+Joshval97
+
+Hace 4 años
+
+14
+También tiene otras herramientas. No sustituye el uso de la consola pero deberían darle una oportunidad.
+https://www.gitkraken.com/
+
 
 ++++++++++
 
+¿Alguien conoce infografías, documentación, resúmenes o algo así sobre Git para tener toda esta información para consultarla de forma rápida como apuntes? ¡Sería de gran ayuda!
 
+Responder
+Leonardo Gomez
+Leonardo Gomez
 
+Hace 3 años
+
+3
+https://git-scm.com/docs
+
+Andrés Felipe Ruiz Buriticá
+Andrés Felipe Ruiz Buriticá
+
+Hace 3 años
+
+2
+En la pag de educación de github https://github.com/arslanbilal/git-cheat-sheet/blob/master/other-sheets/git-cheat-sheet-es.md o la de atlassian (los de bitbucket) https://es.atlassian.com/git/tutorials/atlassian-git-cheatsheet
 
 ++++++++++
 
+Manejo de ramas en GitHub
 
+Primero puede cambiar de rama
+git checkout nombre-de-larama
 
-++++++++++
+Revisar las ramas que existen
+git branch
+
+Cuales don las ramas que existen y cual es su historia
+git show-branch
+
+git show-branch --all
+
+Ver todo la historia de manera visual
+gitk
 
 ********************************************************************************************************
 
+Configurar múltiples colaboradores en un repositorio de GitHub 25/43
+
+https://github.com/guajardo/Comandos-git
+https://github.com/arslanbilal/git-cheat-sheet/blob/master/other-sheets/git-cheat-sheet-es.md
 
 
-++++++++++
 
+Por defecto, cualquier persona puede clonar o descargar tu proyecto desde GitHub, pero no pueden crear commits, ni ramas. Esto quiere decir que pueden copiar tu proyecto pero no colaborar con él. Existen varias formas de solucionar esto para poder aceptar contribuciones. Una de ellas es añadir a cada persona de nuestro equipo como colaborador de nuestro repositorio.
 
+Cómo agregar colaboradores en Github
+Solo debemos entrar a la configuración de colaboradores de nuestro proyecto. Se encuentra en:
+Repositorio > Settings > Collaborators
+Ahí, debemos añadir el email o username de los nuevos colaboradores.
+
+collaborator.png
+Si, como colaborador, agregaste erróneamente el mensaje del commit, lo puedes cambiar de la siguiente manera:
+
+Hacer un commit con el nuevo mensaje que queremos, esto nos abre el editor de texto de la terminal:
+git commit —amend
+Corregimos el mensaje
+Traer el repositorio remoto
+git pull origin master
+Ejecutar el cambio
+git push --set-upstream origin master
 
 
 ++++++++++
