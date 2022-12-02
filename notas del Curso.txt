@@ -14,9 +14,7 @@ git checkout: traer cambios realizados
 git checkout idSHA : nos permite viajar en el tiempo. Podemos volver a cualquier versión anterior de un archivo específico o incluso del proyecto entero. Esta también es la forma de crear ramas y movernos entre ellas.
 git checkout master file.txt : vuelve al archivo a la ultima version
 
-
 git reset (--soft, mixed, --hard)
-
 
 git config: para ver las posibles configiguraciones
 git config --list: para ver la lista de configiguraciones hechas
@@ -25,9 +23,42 @@ git rm --cached nombre_del_archivo.txt: para eliminar el archivo del staged(ram)
 git rm nombre_del_archivo.txt: para eliminar del repositorio
 
 
+-- clonar en un origen remoto
+git remote add origin https://github.com/samuelpv85/Hyperblog.git
+git remote =
+git remote -v =
+git push origin master = enviar al origen la ramaMaster
+git pull origin master = trae desde la ramaMaster al repo local
+
+
+crear llaves ssh
+copiarla en el repositorio
+agregar ssh al repositorio local
+
+- Tags y versiones
+git tag -a v0.1 -m "comentario" diCommit
+git tag
+git show-ref --tags
+
+
 git config --global user.name "Samuel Patiño"
 git config --global user.email "levivo2@hotmail.com"
 pass = tesV2525spv
+
+Trabajando con repositorio remoto
+git clone url_del_servidor_remoto: Nos permite descargar los archivos de la última versión de la rama principal y todo el historial de cambios en la carpeta .git.
+git push: Luego de hacer git add y git commit debemos ejecutar este comando para mandar los cambios al servidor remoto.
+git fetch: Lo usamos para traer actualizaciones del servidor remoto y guardarlas en nuestro repositorio local (en caso de que hayan, por supuesto).
+git merge: También usamos el comando git merge con servidores remotos. Lo necesitamos para combinar los últimos cambios del servidor remoto y nuestro directorio de trabajo.
+git pull: Básicamente, git fetch y git merge al mismo tiempo.
+
+git branch NameBranch: crear una nueva rama.
+git checkout NameBranch: moverse entre ramas.
+git push: mandar cambios a un servidor remoto.
+git fetch: traer actualizaciones del servidor remoto y guardarlas en nuestro repositorio local.
+git merge: tiene dos usos. Uno es la fusión de ramas, funcionando como un commit en la rama actual, trayendo la rama indicada. Su otro uso es guardar los cambios de un servidor remoto en nuestro directorio.
+git pull: fetch y merge al mismo tiempo.
+
 
 
 
@@ -345,6 +376,351 @@ Aporte creado por: HellenBar
 
 
 ********************************************************************************************************
+Introducción a las ramas o branches de Git
+15/43
+
+RECURSOS
+MARCADORES
+Las ramas (branches) son la forma de hacer cambios en nuestro proyecto sin afectar el flujo de trabajo de la rama principal. Esto porque queremos trabajar una parte muy específica de la aplicación o simplemente experimentar.
+
+La cabecera o HEAD representan la rama y el commit de esa rama donde estamos trabajando. Por defecto, esta cabecera aparecerá en el último commit de nuestra rama principal. Pero podemos cambiarlo al crear una rama (git branch rama, git checkout -b rama) o movernos en el tiempo a cualquier otro commit de cualquier otra rama con los comandos (git reset id-commit, git checkout rama-o-id-commit).
+
+Cómo funcionan las ramas en GIT
+Las ramas son la manera de hacer cambios en nuestro proyecto sin afectar el flujo de trabajo de la rama principal. Esto porque queremos trabajar una parte muy específica de la aplicación o simplemente experimentar.
+
+git branch -nombre de la rama-: Con este comando se genera una nueva rama.
+
+git checkout -nombre de la rama-: Con este comando puedes saltar de una rama a otra.
+
+git checkout -b rama: Genera una rama y nos mueve a ella automáticamente, Es decir, es la combinación de git brach y git checkout al mismo tiempo.
+
+git reset id-commit: Nos lleva a cualquier commit no importa la rama, ya que identificamos el id del tag., eliminando el historial de los commit posteriores al tag seleccionado.
+
+git checkout rama-o-id-commit: Nos lleva a cualquier commit sin borrar los commit posteriores al tag seleccionado.
+
+Aporte creado por: Carlos Eduardo Diaz
+
+
+********************************************************************************************************
+Fusión de ramas con Git merge
+16/43
+
+RECURSOS
+MARCADORES
+El comando git merge nos permite crear un nuevo commit con la combinación de dos ramas o branches (la rama donde nos encontramos cuando ejecutamos el comando y la rama que indiquemos después del comando).
+
+Cómo usar Git merge
+En este ejemplo, vamos a crear un nuevo commit en la rama master combinando los cambios de una rama llamada cabecera:
+
+git checkout master
+git merge cabecera
+Otra opción es crear un nuevo commit en la rama cabecera combinando los cambios de cualquier otra rama:
+
+git checkout cabecera
+git merge cualquier-otra-rama
+Asombroso, ¿verdad? Es como si Git tuviera superpoderes para saber qué cambios queremos conservar de una rama y qué otros de la otra. El problema es que no siempre puede adivinar, sobre todo en algunos casos donde dos ramas tienen actualizaciones diferentes en ciertas líneas en los archivos. Esto lo conocemos como un conflicto.
+
+Recuerda que al ejecutar el comando git checkout para cambiar de rama o commit puedes perder el trabajo que no hayas guardado. Guarda siempre tus cambios antes de hacer git checkout.
+
+Comandos básicos de GitHub
+git init: crear un repositorio.
+git add: agregar un archivo a staging.
+git commit -m “mensaje”: guardar el archivo en git con un mensaje.
+git branch: crear una nueva rama.
+git checkout: moverse entre ramas.
+git push: mandar cambios a un servidor remoto.
+git fetch: traer actualizaciones del servidor remoto y guardarlas en nuestro repositorio local.
+git merge: tiene dos usos. Uno es la fusión de ramas, funcionando como un commit en la rama actual, trayendo la rama indicada. Su otro uso es guardar los cambios de un servidor remoto en nuestro directorio.
+git pull: fetch y merge al mismo tiempo.
+Comandos para corrección en GitHub
+git checkout “codigo de version” “nombre del archivo”: volver a la última versión de la que se ha hecho commit.
+git reset: vuelve al pasado sin posibilidad de volver al futuro, se debe usar con especificaciones.
+git reset --soft: vuelve a la versión en el repositorio, pero guarda los cambios en staging. Así, podemos aplicar actualizaciones a un nuevo commit.
+git reset --hard: todo vuelve a su versión anterior
+git reset HEAD: saca los cambios de staging, pero no los borra. Es lo opuesto a git add.
+git rm: elimina los archivos, pero no su historial. Si queremos recuperar algo, solo hay que regresar. se utiliza así:
+git rm --cached elimina los archivos en staging pero los mantiene en el disco duro.
+git rm --force elimina los archivos de git y del disco duro.
+Comandos para revisión y comparación en GitHub
+git status: estado de archivos en el repositorio.
+git log: historia entera del archivo.
+git log --stat: cambios específicos en el archivo a partir de un commit.
+git show: cambios históricos y específicos hechos en un archivo.
+git diff “codigo de version 1” “codigo de version 2”: comparar cambios entre versiones.
+git diff: comparar directorio con staging.
+Aporte creado por: Pedro Alejandro Silva.
+
+
+
+********************************************************************************************************
+Resolución de conflictos al hacer un merge
+17/43
+
+RECURSOS
+MARCADORES
+Git nunca borra nada, a menos que nosotros se lo indiquemos. Cuando usamos los comandos git merge o git checkout estamos cambiando de rama o creando un nuevo commit, no borrando ramas ni commits (recuerda que puedes borrar commits con git reset y ramas con git branch -d).
+
+Git es muy inteligente y puede resolver algunos conflictos automáticamente: cambios, nuevas líneas, entre otros. Pero algunas veces no sabe cómo resolver estas diferencias, por ejemplo, cuando dos ramas diferentes hacen cambios distintos a una misma línea.
+
+Esto lo conocemos como conflicto y lo podemos resolver manualmente. Solo debemos hacer el merge, ir a nuestro editor de código y elegir si queremos quedarnos con alguna de estas dos versiones o algo diferente. Algunos editores de código como Visual Studio Code nos ayudan a resolver estos conflictos sin necesidad de borrar o escribir líneas de texto, basta con hacer clic en un botón y guardar el archivo.
+
+Recuerda que siempre debemos crear un nuevo commit para aplicar los cambios del merge. Si Git puede resolver el conflicto, hará commit automáticamente. Pero, en caso de no pueda resolverlo, debemos solucionarlo y hacer el commit.
+
+Los archivos con conflictos por el comando git merge entran en un nuevo estado que conocemos como Unmerged. Funcionan muy parecido a los archivos en estado Unstaged, algo así como un estado intermedio entre Untracked y Unstaged. Solo debemos ejecutar git add para pasarlos al área de staging y git commit para aplicar los cambios en el repositorio.
+
+Cómo revertir un merge
+Si nos hemos equivocado y queremos cancelar el merge, debemos usar el siguiente comando:
+
+git merge --abort
+Conflictos en repositorios remotos
+Al trabajar con otras personas, es necesario utilizar un repositorio remoto.
+­
+-Para copiar el repositorio remoto al directorio de trabajo local, se utiliza el comando git clone <url>, y para enviar cambios al repositorio remoto se utiliza git push.
+-Para actualizar el repositorio local se hace uso del comando git fetch, luego se debe fusionar los datos traídos con los locales usando git merge.
+
+Para traer los datos y fusionarlos a la vez, en un solo comando, se usa git pull.
+­- Para crear commits rápidamente, fusionando git add y git commit -m "", usamos git commit -am "".
+­- Para generar nuevas ramas, hay que posicionarse sobre la rama que se desea copiar y utilizar el comando git branch <nombre>.
+Para saltar entre ramas, se usa el comando git checkout <branch>
+­- Una vez realizado los cambios en la rama, estas deben fusionarse con git merge.
+El merge ocurre en la rama en la que se está posicionado. Por lo tanto, la rama a fusionar se transforma en la principal.
+Los merges también son commits.
+Los merges pueden generar conflictos, esto aborta la acción y pide que soluciones el problema manualmente, aceptando o rechazando los cambios que vienen.
+Aporte creado por: José Tuzinkievicz, Lottie
+
+
+
+********************************************************************************************************
+Cambios en GitHub: de master a main
+18/43
+
+LECTURA
+
+El escritor Argentino Julio Cortázar afirma que las palabras tienen color y peso. Por otro lado, los sinónimos existen por definición, pero no expresan lo mismo. Feo no es lo mismo que desagradable, ni aromático es lo mismo que oloroso.
+
+Por lo anterior podemos afirmar que los sinónimos no expresan lo mismo, no tienen el mismo “color” ni el mismo “peso”.
+
+Sí, esta lectura es parte del curso profesional de Git & GitHub. Quédate conmigo.
+
+Desde el 1 de octubre de 2020 GitHub cambió el nombre de la rama principal: ya no es “master” -como aprenderás en el curso- sino main.
+
+Este derivado de una profunda reflexión ocasionada por el movimiento #BlackLivesMatter.
+
+La industria de la tecnología lleva muchos años usando términos como master, slave, blacklist o whitelist y esperamos pronto puedan ir desapareciendo.
+
+Y sí, las palabras importan.
+
+Por lo que de aquí en adelante cada vez que escuches a Freddy mencionar “master” debes saber que hace referencia a “main”
+
+Puedes leer un poco más aquí: Cambios en GitHub: de master a main
+
+
+********************************************************************************************************
+
+Uso de GitHub
+19/43
+
+RECURSOS
+MARCADORES
+GitHub es una plataforma que nos permite guardar repositorios de Git que podemos usar como servidores remotos y ejecutar algunos comandos de forma visual e interactiva (sin necesidad de la consola de comandos).
+
+Luego de crear nuestra cuenta, podemos crear o importar repositorios, crear organizaciones y proyectos de trabajo, descubrir repositorios de otras personas, contribuir a esos proyectos, dar estrellas y muchas otras cosas.
+
+El README.md es el archivo que veremos por defecto al entrar a un repositorio. Es una muy buena práctica configurarlo para describir el proyecto, los requerimientos y las instrucciones que debemos seguir para contribuir correctamente.
+
+Para clonar un repositorio desde GitHub (o cualquier otro servidor remoto) debemos copiar la URL (por ahora, usando HTTPS) y ejecutar el comando git clone + la URL que acabamos de copiar. Esto descargará la versión de nuestro proyecto que se encuentra en GitHub.
+
+Sin embargo, esto solo funciona para las personas que quieren empezar a contribuir en el proyecto.
+
+Cómo conectar un repositorio de GitHub a nuestro documento local
+Si queremos conectar el repositorio de GitHub con nuestro repositorio local, que creamos usando el comando git init, debemos ejecutar las siguientes instrucciones:
+
+Guardar la URL del repositorio de GitHub con el nombre de origin
+git remote add origin URL
+Verificar que la URL se haya guardado correctamente:
+git remote
+git remote -v
+Traer la versión del repositorio remoto y hacer merge para crear un commit con los archivos de ambas partes. Podemos usar git fetch y git merge o solo git pull con el flag --allow-unrelated-histories:
+git pull origin master --allow-unrelated-histories
+Por último, ahora sí podemos hacer git push para guardar los cambios de nuestro repositorio local en GitHub:
+git push origin master
+Cómo autenticarte en GitHub 2022
+Antes de empezar debemos renombrar la rama ‘máster’ a ‘main’, este es el nuevo estándar en GitHub, para esto:
+
+Primero nos posicionamos en la rama a la que queremos cambiarle el nombre.
+Ejecutamos el siguiente comando: git branch -M main
+Pasos para crear un token de acceso personal.
+
+Desde el 2022 GitHub ya no deja hacer el push con la contraseña del propio GitHub, para esto tenemos que crear un token, y este token es la contraseña que vamos a colocar cuando nos pida clave
+
+Seguir la secuencia: Ingresamos a nuestra cuenta de GitHub.
+
+Buscamos Settings
+Click en Developer settings
+Click en Personal access tokens
+Click en Generate new token aquí se puede colocar un nombre, la fecha de expiración.
+Tildar en repo y luego click en el botón verde Generate token
+Aporte creado por: Ana Rotela
+
+Archivos de la clase
+
+
+
+# Primero: Guardar la URL del repositorio de GitHub
+# con el nombre de origin
+git remote add origin URL
+
+# Segundo: Renombrar la rama master
+git branch -M master main
+
+# Tercero: Traer la versión del repositorio remoto e
+# hice el merge para crear un commit con los archivos
+# de ambas partes.
+git pull origin main --allow-unrelated-histories
+
+# Cuarto: hacer el git push para guardar
+# los cambios de nuestro repositorio local en GitHub:
+git push origin main
+
+********************************************************************************************************
+
+Cómo funcionan las llaves públicas y privadas
+20/43
+
+RECURSOS
+MARCADORES
+Las llaves públicas y privadas, conocidas también como cifrado asimétrico de un solo camino, sirven para mandar mensajes privados entre varios nodos con la lógica de que firmas tu mensaje con una llave pública vinculada con una llave privada que puede leer el mensaje.
+
+Las llaves públicas y privadas nos ayudan a cifrar y descifrar nuestros archivos de forma que los podamos compartir sin correr el riesgo de que sean interceptados por personas con malas intenciones.
+
+Cómo funciona un mensaje cifrado con llaves públicas y privadas
+Ambas personas deben crear su llave pública y privada.
+Ambas personas pueden compartir su llave pública a las otras partes (recuerda que esta llave es pública, no hay problema si la “interceptan”).
+La persona que quiere compartir un mensaje puede usar la llave pública de la otra persona para cifrar los archivos y asegurarse que solo puedan ser descifrados con la llave privada de la persona con la que queremos compartir el mensaje.
+El mensaje está cifrado y puede ser enviado a la otra persona sin problemas en caso de que los archivos sean interceptados.
+La persona a la que enviamos el mensaje cifrado puede emplear su llave privada para descifrar el mensaje y ver los archivos.
+Nota: puedes compartir tu llave pública, pero nunca tu llave privada.
+
+Aporte creado por: David Behar
+
+Archivos de la clase
+
+********************************************************************************************************
+
+Configura tus llaves SSH en local
+21/43
+
+RECURSOS
+MARCADORES
+En este ejemplo, aprenderemos cómo configurar nuestras llaves SSH en local.
+
+Cómo generar tus llaves SSH
+1. Generar tus llaves SSH**
+Recuerda que es muy buena idea proteger tu llave privada con una contraseña.
+
+ssh-keygen -t rsa -b 4096 -C "tu@email.com"
+2. Terminar de configurar nuestro sistema.
+En Windows y Linux:
+
+Encender el “servidor” de llaves SSH de tu computadora:
+eval $(ssh-agent -s)
+Añadir tu llave SSH a este “servidor”:
+ssh-add ruta-donde-guardaste-tu-llave-privada
+En Mac:
+
+Encender el “servidor” de llaves SSH de tu computadora:
+eval "$(ssh-agent -s)"
+Si usas una versión de OSX superior a Mac Sierra (v10.12), debes crear o modificar un archivo “config” en la carpeta de tu usuario con el siguiente contenido (ten cuidado con las mayúsculas):
+Host *
+
+AddKeysToAgent yes
+UseKeychain yes
+IdentityFile ruta-donde-guardaste-tu-llave-privada
+Añadir tu llave SSH al “servidor” de llaves SSH de tu computadora (en caso de error puedes ejecutar este mismo comando pero sin el argumento -K):
+ssh-add -K ruta-donde-guardaste-tu-llave-privada
+Aporte creado por: Juan Luis Rojas
+
+Archivos de la clase
+
+
+
+Generar una nueva llave SSH: (Cualquier sistema operativo)
+
+ssh-keygen -t rsa -b 4096 -C "youremail@example.com"
+
+Comprobar proceso y agregarlo (Windows)
+
+eval $(ssh-agent - s)
+ssh-add ~/.ssh/id_rsa
+Comprobar proceso y agregarlo (Mac)
+
+eval "$(ssh-agent -s)"
+¿Usas macOS Sierra 10.12.2 o superior?
+Haz lo siguiente:
+
+cd ~/.ssh
+Crea un archivo config…
+Con Vim vim config
+Con VSCode code config
+Pega la siguiente configuración en el archivo…
+Host *
+  AddKeysToAgent yes
+  UseKeychain yes
+  IdentityFile ~/.ssh/id_rsa
+Agrega tu llave
+
+ssh-add -K ~/.ssh/id_rsa
+
+********************************************************************************************************
+Conexión a GitHub con SSH
+22/43
+
+RECURSOS
+MARCADORES
+La creación de las SSH es necesario solo una vez por cada computadora. Aquí conocerás cómo conectar a GitHub usando SSH.
+
+Luego de crear nuestras llaves SSH podemos entregarle la llave pública a GitHub para comunicarnos de forma segura y sin necesidad de escribir nuestro usuario y contraseña todo el tiempo.
+
+Para esto debes entrar a la Configuración de Llaves SSH en GitHub, crear una nueva llave con el nombre que le quieras dar y el contenido de la llave pública de tu computadora.
+
+Ahora podemos actualizar la URL que guardamos en nuestro repositorio remoto, solo que, en vez de guardar la URL con HTTPS, vamos a usar la URL con SSH:
+
+ssh
+git remote set-url origin url-ssh-del-repositorio-en-github
+Comandos para copiar la llave SSH:
+-Mac:
+
+pbcopy < ~/.ssh/id_rsa.pub
+Windows (Git Bash):
+clip < ~/.ssh/id_rsa.pub
+Linux (Ubuntu):
+cat ~/.ssh/id_rsa.pub
+
+
+********************************************************************************************************
+Tags y versiones en Git y GitHub
+23/43
+
+RECURSOS
+MARCADORES
+Los tags o etiquetas nos permiten asignar versiones a los commits con cambios más importantes o significativos de nuestro proyecto.
+
+Comandos para trabajar con etiquetas:
+Crear un nuevo tag y asignarlo a un commit: git tag -a nombre-del-tag id-del-commit.
+Borrar un tag en el repositorio local: git tag -d nombre-del-tag.
+Listar los tags de nuestro repositorio local: git tag o git show-ref --tags.
+Publicar un tag en el repositorio remoto: git push origin --tags.
+Borrar un tag del repositorio remoto: git tag -d nombre-del-tag y git push origin :refs/tags/nombre-del-tag.
+Para generar un comando complejo con varios comandos de una forma optimizada, utilizamos conjuntos de sentencias conocidas como alias.
+
+Cómo aregar un alias solo para git
+Para un proyecto:
+git config alias.arbolito "log --all --graph --decorate --oneline"
+Global:
+git config --global alias.arbolito "log --all --graph --decorate --oneline"
+Para correrlo:
+git arbolito
+Aporte creado por: Jorge Sarabia
 
 
 
@@ -352,15 +728,26 @@ Aporte creado por: HellenBar
 
 
 
+********************************************************************************************************
+
+
 
 ********************************************************************************************************
 
 
 
+********************************************************************************************************
 
 ********************************************************************************************************
 
+********************************************************************************************************
 
+********************************************************************************************************
 
+********************************************************************************************************
+
+********************************************************************************************************
+
+********************************************************************************************************
 
 ********************************************************************************************************
