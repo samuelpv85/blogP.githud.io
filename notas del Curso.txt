@@ -1,4 +1,9 @@
 Resume:
+
+git log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+
+
+
 git init: para inicializar el repositorio git y el staged
 git add nombre_del_archivo.txt: enviar el archivo al staged
 git status: ver el estado, si se requiere agregar al starget o si se requiere commit
@@ -963,7 +968,7 @@ Flujo de trabajo profesional con Pull requests
 https://nvie.com/posts/a-successful-git-branching-model/
 https://stackoverflow.com/questions/21657430/why-is-a-git-pull-request-not-called-a-push-request
 https://www.dataschool.io/how-to-contribute-on-github/
-
+https://github.com/samuelpv85/blogP/blob/master/git-cheat-sheet-education.pdf
 
 RECURSOS
 MARCADORES
@@ -1091,36 +1096,61 @@ Finalmente Pasa a el servidor de produccion con el merge request ya conocido y t
 
 ++++++++++
 
+a funcionalidad de Github (en Gitlab llamada merge request y en Bitbucket push request), en la que un colaborador pide que revisen sus cambios antes de hacer merge a una rama, normalmente master (ahora conocida como main).
+
+Al hacer un pull request, se genera una conversación que pueden seguir los demás usuarios del repositorio, así como autorizar y rechazar los cambios.
+
+Cómo se realiza un pull request
+Se trabaja en una rama paralela los cambios que se desean git checkout -b <rama>.
+Se hace un commit a la rama git commit -am '<Comentario>'.
+Se suben al remoto los cambios git push origin <rama>.
+En GitHub se hace el pull request comparando la rama master con la rama del fix.
+Uno, o varios colaboradores revisan que el código sea correcto y dan feedback (en el chat del pull request).
+El colaborador hace los cambios que desea en la rama y lo vuelve a subir al remoto (automáticamente jala la historia de los cambios que se hagan en la rama, en remoto).
+Se aceptan los cambios en GitHub.
+Se hace merge a master desde GitHub.
+Importante: Cuando se modifica una rama, también se modifica el pull request.
+
+++++++++++
+
+
+Datos importantes de esta clase:
+-Los PullRequest no generan un Merge, es un preludio a este para revisar los cambios.
+-Dentro de los PullRequest se puede hacer un review para analizar los commits y cambios, esto permite entender qué es lo que se espera fusionar.
+-Si un PullRequest no es aprobado, se deben realizar los cambios, hacer un pull y luego si un push para que se vuelvan a evaluar.
+-Si un PullRequest es aprobado, pasa a la siguiente etapa de hacer merge. Este merge es semejante a un commit.
+
+Espero que les ayude.
+
+++++++++++
+
+
+
+++++++++++
 
 ********************************************************************************************************
+Utilizando Pull Requests en GitHub
+28/43
+
+https://aws.amazon.com/es/devops/what-is-devops/
 
 
-++++++++++
+RECURSOS
+MARCADORES
+Pull request es una funcionalidad de Github (en Gitlab llamada merge request y en Bitbucket push request), en la que un colaborador pide que revisen sus cambios antes de hacer merge a una rama, normalmente master (ahora conocida como main).
 
+Al hacer un pull request, se genera una conversación que pueden seguir los demás usuarios del repositorio, así como autorizar y rechazar los cambios.
 
-
-
-++++++++++
-
-
-
-++++++++++
-
-********************************************************************************************************
-
-
-++++++++++
-
-
-
-
-++++++++++
-
-
-
-++++++++++
-********************************************************************************************************
-
+Cómo se realiza un pull request
+Se trabaja en una rama paralela los cambios que se desean git checkout -b <rama>.
+Se hace un commit a la rama git commit -am '<Comentario>'.
+Se suben al remoto los cambios git push origin <rama>.
+En GitHub se hace el pull request comparando la rama master con la rama del fix.
+Uno, o varios colaboradores revisan que el código sea correcto y dan feedback (en el chat del pull request).
+El colaborador hace los cambios que desea en la rama y lo vuelve a subir al remoto (automáticamente jala la historia de los cambios que se hagan en la rama, en remoto).
+Se aceptan los cambios en GitHub.
+Se hace merge a master desde GitHub.
+Importante: Cuando se modifica una rama, también se modifica el pull request.
 
 ++++++++++
 
@@ -1133,16 +1163,364 @@ Finalmente Pasa a el servidor de produccion con el merge request ya conocido y t
 
 ++++++++++
 ********************************************************************************************************
+Creando un Fork, contribuyendo a un repositorio
+29/43
+
+
+
+RECURSOS
+MARCADORES
+Los forks o bifurcaciones son una característica única de GitHub en la que se crea una copia exacta del estado actual de un repositorio directamente en GitHub. Este repositorio podrá servir como otro origen y se podrá clonar (como cualquier otro repositorio). En pocas palabras, lo podremos utilizar como un nuevo repositorio git cualquiera
+
+Un fork es como una bifurcación del repositorio completo. Comparte una historia en común con el original, pero de repente se bifurca y pueden aparecer varios cambios, ya que ambos proyectos podrán ser modificados en paralelo y para estar al día un colaborador tendrá que estar actualizando su fork con la información del original.
+
+Al hacer un fork de un poryecto en GitHub, te conviertes en dueñ@ del repositorio fork, puedes trabajar en este con todos los permisos, pero es un repositorio completamente diferente que el original, teniendo solamente alguna historia en común (como crédito al creado o creadora original).
+
+Los forks son importantes porque es la manera en la que funciona el open source, ya que, una persona puede no ser colaborador de un proyecto, pero puede contribuír al mismo, haciendo mejor software que pueda ser utilizado por cualquiera.
+
+Cómo se hace un fork remoto desde consola en GitHub
+Al hacer un fork, GitHub sabe que se hizo el fork del proyecto, por lo que se le permite al colaborador hacer pull request desde su repositorio propio.
+
+Cuando trabajas en un proyecto que existe en diferentes repositorios remotos (normalmente a causa de un fork), es muy probable que desees poder trabajar con ambos repositorios. Para esto, puedes generar un remoto adicional desde consola.
+
+git remote add <nombre_del_remoto> <url_del_remoto> 
+git remote upstream https://github.com/freddier/hyperblog
+Al crear un remoto adicional, podremos hacer pull desde el nuevo origen. En caso de tener permisos, podremos hacer fetch y push.
+
+git pull <remoto> <rama>
+git pull upstream master
+Este pull nos traerá los cambios del remoto, por lo que se estará al día en el proyecto. El flujo de trabajo cambia, en adelante se estará trabajando haciendo pull desde el upstream y push al origin para pasar a hacer pull request.
+
+git pull upstream master
+git push origin master
+
+++++++++++
+
+*******************
+****Iniciar Git****
+*******************
+
+git int
+
+*******************
+****Iniciar Git****
+*******************
+
+**********************************
+*******Configuración de Git*******
+**********************************
+
+git config
+git config --list
+git config --list --show origin
+git config --list --show-origin
+git config --global
+git config --global user.name "SC"
+git config --global user.email "jesuscastellanospaez@hotmail.com"
+
+**********************************
+*******Configuración de Git*******
+**********************************
+
+********************************************
+******Agragar a la zona de preparación******
+********************************************
+
+git add Archivo.txt
+
+git add .
+
+********************************************
+******Agragar a la zona de preparación******
+********************************************
+
+****************************
+*********Ver estado*********
+****************************
+
+git status
+
+****************************
+*********Ver estado*********
+****************************
+
+***************************************************************************
+*****************Quitar de la zona de preparación**************************
+***************************************************************************
+
+git rm --cached archivo.txt (Quitar de la zona de preparación).
+
+***************************************************************************
+*****************Quitar de la zona de preparación**************************
+***************************************************************************
+
+************************************************************
+**********************Realizar commint**********************
+************************************************************
+
+git commit -m "Este es el pimer commit de este archivo"
+git commit -am "Este es el pimer commit de este archivo"
+
+************************************************************
+**********************Realizar commint**********************
+************************************************************
+
+*****************************************************
+*******Ver el historial de cambios del archivo*******
+*****************************************************
+
+git log
+git log Archivo.txt
+
+*****************************************************
+*******Ver el historial de cambios del archivo*******
+*****************************************************
+
+***************************************************************
+************Muestra todos los cambios sobre un archivo*********
+***************************************************************
+
+git show Archivo.txt
+
+***************************************************************
+************Muestra todos los cambios sobre un archivo*********
+***************************************************************
+
+**************************************
+**********Comparar versiones**********
+**************************************
+
+git diff commint commint
+
+**************************************
+**********Comparar versiones**********
+**************************************
+
+*****************************************************************************
+************************Volver a una versión anterior************************
+*****************************************************************************
+
+git reset commit --hard (borramos todos los cambios y lo que tengamos en staging) 
+
+git reset commit --soft (soft conservamos cambios y lo que tengamos en staging) 
+
+git checkout (commit) Archivo.txt
+
+git checkout (rama) Archivo.txt
+*****************************************************************************
+************************Volver a una versión anterior************************
+*****************************************************************************
+
+****************************************************************************
+**************************Ver Cambio en bytes*******************************
+****************************************************************************
+
+git log --stat(Cambio en bytes)
+
+****************************************************************************
+**************************Ver Cambio en bytes*******************************
+****************************************************************************
+
+***************************************************************************
+****************************Crear una rama*********************************
+***************************************************************************
+
+git branch (branchName)
+
+***************************************************************************
+****************************Crear una rama*********************************
+***************************************************************************
+
+
+***************************************************************************
+**************************Cambiar de rama**********************************
+***************************************************************************
+
+git checkout (branchName)
+
+***************************************************************************
+**************************Cambiar de rama**********************************
+***************************************************************************
+
+*******************************************************************
+************************Merge entre branchs************************
+*******************************************************************
+
+git merge (branchName)
+
+**Estar en la rama master o en la que se quiere dejar el <Head>**
+*******************************************************************
+************************Merge entre branchs************************
+*******************************************************************
+
+****************************************************
+************Traer un repositorio externo************
+****************************************************
+
+git remote add origin (url)
+git remote (muestra el origen)
+git remote -v(es verval)
+
+git pull origin master --allow-unrelated-histories (Fuerza la union de las diferentes historias)
+
+git pull origin master (Descarga cambios)
+
+git push (origin) (master) (Sube Cambios)
+****************************************************
+************Traer un repositorio externo************
+****************************************************
+
+*************************************
+**************Seguridad**************
+*************************************
+
+ssh-keygen -t rsa -b 4096 -C "jesuscastellanospaez@gmail.com" (crea la llave publica y privada)
+eval $(ssh-agent -s) (saber si el agente ssh esta ejecuntando)
+ssh-add ~/.ssh/id_rsa (agregar la llave privada)
+
+git remote set-url origin git@github.com:gsuscastellanosSC/hyperblog.git (cambiar url para que sea con ssh)
+
+
+*************************************
+**************Seguridad**************
+*************************************
+
+**********************************
+***************TAGS***************
+**********************************
+
+git log --all(Muesta toda la historia)
+git log --all --graph (Muestra toda la historia con la ineracción de las ramas)
+git log --all --graph --decorate --oneline
+alias arbolito="git log --all --graph --decorate --oneline"(forma de alias en linux)
+
+git tag -a v0.1 -m "apendiendo tags en git" (hash del commit) (crear un tag)
+git show-ref --tags
+
+git push origin --tags (enviar los tags al repositorio remoto)
+git tag -d v0.1   && $ git push origin :refs/tags/v0.1 (Borrar tags)
+
+
+**********************************
+***************TAGS***************
+**********************************
+
+************************
+********ramas***********
+************************
+
+git show-branch --all (¿Cuales branch existen y sus historias)
+gitk (igual que la anterior per con gui)
+git push origin :[nombre_branch] (Elimina rama remota)
+
+
+************************
+********ramas***********
+************************
+
+************************
+***Crear fuente nueva***
+************************
+
+git remote add upstream (url-github)
+git pull upstream master (trae todos los cabios de master del origen upstream)
+
+************************
+***Crear fuente nueva***
+************************
 
 
 ++++++++++
 
+Para hacer una contribución a un proyecto de Github hay que seguir los siguientes pasos:
 
+Darle al botón de Fork en Github
+Hacer los cambios y darle push a ellos en mi repositorio
+Hacer un pull request con mis cambios en alguna de las ramas del proyecto original y esperar
+Una vez aprueben o rechacen mis cambios seré notificado en la cuenta de github
+Pero también pasa algo muy interesante y es que cuando yo he hecho un fork, el proyecto original sigue avanzando y el mio se va quedando atras, así que para traer los cambios del proyecto original eso se hace de la siguiente manera:
+
+Crear una nueva fuente para hacer pull desde el repositorio forkeado. Por ejemplo:
+git remote add upstream git@github.com:freddier/hyperblog.git
+Nota: la palabra upstream es opcional pero es lo que normalmente se usa en la industria.
+Verificamos que hay una nueva fuente de datos con
+git remote -v
+Hacer pull de upstream/master
+git pull upstream master
+Hacer un commit para fusionar los cambios que hemos traído
+git commit -am “Fusion”
+Hacer un push para mandar los cambios a nuestro repositorio original
+git push origin master
+
+++++++++++
+
+Forks o Bifurcaciones
+Es una característica única de GitHub en la que se crea una copia exacta del estado actual de un repositorio directamente en GitHub, éste repositorio podrá servir como otro origen y se podrá clonar (como cualquier otro repositorio), en pocas palabras, lo podremos utilizar como un git cualquiera
+.
+Un fork es como una bifurcación del repositorio completo, tiene una historia en común, pero de repente se bifurca y pueden variar los cambios, ya que ambos proyectos podrán ser modificados en paralelo y para estar al día un colaborador tendrá que estar actualizando su fork con la información del original.
+.
+Al hacer un fork de un poryecto en GitHub, te conviertes en dueñ@ del repositorio fork, puedes trabajar en éste con todos los permisos, pero es un repositorio completamente diferente que el original, teniendo alguna historia en común.
+.
+Los forks son importantes porque es la manera en la que funciona el open source, ya que, una persona puede no ser colaborador de un proyecto, pero puede contribuír al mismo, haciendo mejor software que pueda ser utilizado por cualquiera.
+.
+Al hacer un fork, GitHub sabe que se hizo el fork del proyecto, por lo que se le permite al colaborador hacer pull request desde su repositorio propio.
+
+Trabajando con más de 1 repositorio remoto
+Cuando trabajas en un proyecto que existe en diferentes repositorios remotos (normalmente a causa de un fork) es muy probable que desees poder trabajar con ambos repositorios, para ésto puedes crear un remoto adicional desde consola.
+
+git remote add <nombre_del_remoto> <url_del_remoto> 
+git remote upstream https://github.com/freddier/hyperblog
+Al crear un remoto adicional podremos, hacer pull desde el nuevo origen (en caso de tener permisos podremos hacer fetch y push)
+
+git pull <remoto> <rama>
+git pull upstream master
+Éste pull nos traerá los cambios del remoto, por lo que se estará al día en el proyecto, el flujo de trabajo cambia, en adelante se estará trabajando haciendo pull desde el upstream y push al origin para pasar a hacer pull request.
+
+git pull upstream master
+git push origin master
+
+
+********************************************************************************************************
+Haciendo deployment a un servidor
+30/43
+
+RECURSOS
+MARCADORES
+Deploy es el proceso que permite enviar al servidor uno o varios archivos. Este servidor puede ser de prueba, desarrollo o producción.
+
+En el siguiente ejemplo veremos cómo se realiza el deployment de un documento en un servidor web básico.
+
+Pasos para hacer deployment en un servidor web:
+Entrar a la capeta de los archivos del servidor.
+Copiar link en clone, elegir entre HTTPS o SSH del repositorio a contribuir.
+-En la carpeta deseada se clona el repositorio:
+git clone url
+Deploy:
+Realizar cambios y commit en GitHub.
+Traer al Repositorio local las actualizacion para el servidor en la capeta de los archivos del servidor.
+git pull ramaRemota main
+Nota: Siempre se debe proteger el archivo .git. Dependiendo del software para el servidor web, existen diferentes maneras. La conexión entre GitHub y el servidor se puede realizar mediante: Travis (pago) o Jenkis (Open source).
 
 
 ++++++++++
 
+Para practicar de forma fácil pueden levantar un servidor local con python. Primero nos ubicamos en la carpeta del proyecto que queremos inicializar en el servidor y luego ejecutamos el comando según sea python2 o 3.
+con Python 2:
+python -m SimpleHTTPServer 8000
+con Python 3.x:
+python3 -m http.server 8000
+El 8000 indica el puerto donde va a iniciar, entonces en el navegador vamos a 127.0.0.1:8000 y saldrá nuestro proyecto.
+Se puede clonar el repo tranquilamente desde la terminal y para acceder, agrego en la barra de direcciones la ruta a la que quiero ir como hizo Freddy.
 
+++++++++++
+
+Cordial saludo Devs.
+
+Utilizo una herramienta para administrar ramas y observar el flujo de git.
+
+Permite enlazar con las cuentas de GitHub, GitLab, BitBucket, entre otras.
+Permite hacer push, pull
+GitKraken
 
 ++++++++++
 
